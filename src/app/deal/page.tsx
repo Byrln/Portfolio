@@ -60,7 +60,7 @@ export default function DealPage() {
       `Зорилго: ${goals || "(бөглөөгүй)"}`,
       `Тэмдэглэл: ${notes || "(бөглөөгүй)"}`,
     ];
-    return `Санамж бичиг / Deal хүсэлт\n\n${lines
+    return `Ажилын санал\n\n${lines
       .map((l) => `• ${l}`)
       .join("\n")}\n\n— Илгээсэн: ${contactName}`;
   }, [

@@ -1,6 +1,9 @@
 "use client"
 import grainImage from "@/assets/images/grain.jpg";
 import { ContactDialog } from "@/components/ContactDialog";
+import { Manrope } from "next/font/google";
+
+const manrope = Manrope({ subsets: ["latin", "cyrillic"], weight: ["400", "600", "700"] });
 
 export const ContactSection = () => {
   return (
@@ -13,15 +16,22 @@ export const ContactSection = () => {
           ></div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
             <div className="">
-              <h2 className="font-serif text-2xl md:text-3xl">
+              <h2 className={`font-serif text-2xl md:text-3xl ${manrope.className}`}>
                 Хамтдаа гайхалтай зүйлийг бүтээе!
               </h2>
-              <p className="text-sm md:text-base mt-2">
+              <p className={`text-sm md:text-base mt-2 ${manrope.className}`}>
                 Шинэ төсөл эхлүүлэхэд бэлэн үү? Холбогдоод таны санааг хэрхэн
                 бодит болгох талаар ярилцъя.
               </p>
             </div>
-            <div>
+            <div className="flex items-center gap-3">
+              <a
+                href="/deal"
+                className="inline-block px-4 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 border border-white/10"
+              >
+                Deal форм руу очих
+              </a>
+              <span className="text-xs text-gray-800/70 hidden md:inline">эсвэл</span>
               <ContactDialog initialSubject="Төсөл санал" source="contact-section" />
             </div>
           </div>
