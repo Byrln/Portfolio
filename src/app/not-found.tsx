@@ -14,7 +14,7 @@ export default function NotFound() {
           </h1>
           <h2 className="text-2xl font-semibold text-white">Page Not Found</h2>
           <p className="text-gray-400">
-            The page you're looking for doesn't exist or has been moved.
+            Хайгаад байгаа хуудас тань алгадаа.
           </p>
         </div>
 
@@ -24,7 +24,7 @@ export default function NotFound() {
             className="group bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white transition-all duration-300 px-8 border-none"
           >
             <Home className="mr-2 h-4 w-4" />
-            Back to Home
+            Нүүрлүү буцах
           </Button>
         </Link>
       </div>

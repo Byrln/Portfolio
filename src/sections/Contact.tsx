@@ -22,7 +22,7 @@ export const ContactSection = () => {
               </p>
             </div>
             <div>
-              <ContactDialog/>
+              <ContactDialog initialSubject="Төсөл санал" source="contact-section" />
             </div>
           </div>
         </div>

@@ -8,6 +8,9 @@ export const Header = () => {
         <a href="#projects" className="nav-item">
         Төслүүд
         </a>
+        <a href="/deal" className="nav-item">
+        Deal
+        </a>
         <a href="#about" className="nav-item">
         Танилцуулга
         </a>
