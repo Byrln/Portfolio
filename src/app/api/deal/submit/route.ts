@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ensureDealsTable, query } from "@/lib/db";
 
 type Deal = {
   id: string;
@@ -16,9 +17,6 @@ type Deal = {
   summary: string;
   createdAt: string;
 };
-
-const store = (globalThis as any).__deals || [];
-(globalThis as any).__deals = store;
 
 export async function POST(req: Request) {
   try {
@@ -39,7 +37,32 @@ export async function POST(req: Request) {
       summary: body.summary || "",
       createdAt: new Date().toISOString(),
     };
-    store.push(deal);
+    await ensureDealsTable();
+    await query(
+      `INSERT INTO deals (
+        id, company, contact_name, email, phone, domain, project_type,
+        features, budget, timeline, goals, notes, summary, created_at
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7,
+        $8, $9, $10, $11, $12, $13, $14
+      )`,
+      [
+        deal.id,
+        deal.company,
+        deal.contactName,
+        deal.email,
+        deal.phone,
+        deal.domain,
+        deal.projectType,
+        JSON.stringify(deal.features || []),
+        deal.budget,
+        deal.timeline,
+        deal.goals,
+        deal.notes,
+        deal.summary,
+        deal.createdAt,
+      ]
+    );
     return NextResponse.json({ ok: true, id: deal.id });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || "Unknown error" }, { status: 500 });
