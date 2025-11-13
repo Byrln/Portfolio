@@ -85,6 +85,33 @@ export function ContactDialog({
       } else {
         const reply = data?.content || "Уучлаарай, одоогоор хариулт өгч чадсангүй.";
         setMessages((m) => [...m, { role: "assistant", content: reply }]);
+        // If the assistant decided to create a deal, auto-submit via API
+        if (data?.deal) {
+          try {
+            const submitRes = await fetch("/api/deal/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data.deal),
+            });
+            const submitData = await submitRes.json();
+            if (submitRes.ok && submitData?.ok) {
+              setMessages((m) => [
+                ...m,
+                { role: "assistant", content: `Deal үүсгэлээ. ID: ${submitData.id}` },
+              ]);
+            } else {
+              setMessages((m) => [
+                ...m,
+                { role: "assistant", content: `Deal үүсгэхэд алдаа: ${submitData?.error || "Unknown"}` },
+              ]);
+            }
+          } catch (e: any) {
+            setMessages((m) => [
+              ...m,
+              { role: "assistant", content: "Deal үүсгэхэд алдаа гарлаа. Дахин оролдоно уу." },
+            ]);
+          }
+        }
       }
     } catch (e) {
       setMessages((m) => [
@@ -179,22 +206,7 @@ export function ContactDialog({
                   </div>
                 </div>
               )}
-              {phone && (
-                <div className="flex flex-wrap gap-2">
-                  {["Төсөл ярья 👋", "Үнэ хэд орчим байх бол?", "Хугацаа болон дамжуулалт?", "Шаардлагуудын жагсаалт илгээе", "Буллетээр товчилж форматла", "Функцүүдийн санал гарга"].map((q) => (
-                    <button
-                      key={q}
-                      className="text-xs rounded-full bg-white/10 border border-white/10 px-3 py-1 hover:bg-white/15"
-                      onClick={() => {
-                        setInput(q);
-                        setTimeout(() => sendMessage(), 0);
-                      }}
-                    >
-                      {q}
-                    </button>
-                  ))}
-                </div>
-              )}
+              {/* Suggestions removed */}
             </div>
             <div className="p-3 border-t border-white/10 flex gap-2">
               <Textarea
@@ -254,20 +266,7 @@ export function ContactDialog({
             <div className="text-white/60 flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> Бодож байна...</div>
           )}
         </div>
-        <div className="flex flex-wrap gap-2">
-          {["Буллетээр товчилж форматла", "Функцүүдийн санал гарга", "Дараагийн алхмыг жагсаа"].map((q) => (
-            <button
-              key={q}
-              className="text-xs rounded-full bg-white/10 border border-white/10 px-3 py-1 hover:bg-white/15"
-              onClick={() => {
-                setInput(q);
-                setTimeout(() => sendMessage(), 0);
-              }}
-            >
-              {q}
-            </button>
-          ))}
-        </div>
+        {/* Suggestions removed */}
         <div className="flex gap-2">
           <Input
             placeholder="Асуух зүйлээ бичнэ үү"
@@ -279,20 +278,7 @@ export function ContactDialog({
             <Send className="w-4 h-4" /> Илгээх
           </Button>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {["Товч дүгнэлт гарга", "Төсвийн хүрээг тайлбарла", "Шаардлага асуултуудыг жагсаа"].map((q) => (
-            <button
-              key={q}
-              className="text-xs rounded-full bg-white/10 border border-white/10 px-3 py-1 hover:bg-white/15"
-              onClick={() => {
-                setInput(q);
-                setTimeout(() => sendMessage(), 0);
-              }}
-            >
-              {q}
-            </button>
-          ))}
-        </div>
+        {/* Suggestions removed */}
         <div className="text-xs text-white/50">Эх сурвалж: {source ?? "contact-section"}</div>
         <div className="flex items-center justify-center gap-3 text-center text-white/70">
           <a href="https://www.facebook.com/byrlnnn" target="_blank" rel="noopener noreferrer" className="underline">Facebook</a>

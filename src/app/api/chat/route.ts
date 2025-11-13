@@ -25,6 +25,10 @@ export async function POST(req: Request) {
               "Үргэлж төгсгөлд нь ‘Дараагийн алхам’ хэсгийг оруулж, тодруулга авах 2–3 асуулт болон дараагийн санал болгосон үйлдлийг жагсаа.",
               "Урт текст бүү явуул; чатаар уншихад амар байхаар шинэ мөр, буллет ашигла.",
               "Хэрэглэгч утасны дугаараа илгээвэл цааш явах; утас байхгүй бол уг мэдээллийг хүсэж дахин сануулж болно. Дугаарыг нууцлалтай авч үзэж, бусад мэдрэмтгий өгөгдөл битгий асуу.",
+              "Хэрэв яриа ‘deal’ үүсгэхэд бэлэн болсныг чи шийдвэл дараах 2 мөрийг нэмж оруул:",
+              "CREATE_DEAL",
+              "{\"company\":...,\"contactName\":...,\"email\":...,\"phone\":...,\"domain\":...,\"projectType\":...,\"features\":[...],\"budget\":...,\"timeline\":...,\"goals\":...,\"notes\":...,\"summary\":...}",
+              "JSON‑ийг цомхон, код блокгүйгээр өг. Хэрэв бэлэн биш бол энэ хэсгийг битгий оруул.",
             ].join("\n"),
         },
         ...(Array.isArray(messages) ? messages : []),
@@ -47,7 +51,25 @@ export async function POST(req: Request) {
     }
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content ?? "";
-    return NextResponse.json({ content });
+    let deal: any = null;
+    try {
+      const marker = "CREATE_DEAL";
+      if (content.includes(marker)) {
+        const after = content.split(marker)[1] || "";
+        // Try to find a JSON object either as plain or fenced
+        const fenceMatch = after.match(/```json[\s\S]*?```/i);
+        const plainMatch = after.match(/\{[\s\S]*\}/);
+        let jsonStr = fenceMatch ? fenceMatch[0].replace(/```json|```/gi, "").trim() : (plainMatch ? plainMatch[0] : "");
+        if (jsonStr) {
+          const obj = JSON.parse(jsonStr);
+          // Basic shape validation
+          if (obj && obj.company && obj.contactName && obj.email && obj.domain) {
+            deal = obj;
+          }
+        }
+      }
+    } catch {}
+    return NextResponse.json({ content, deal });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || "Unknown error" }, { status: 500 });
   }
