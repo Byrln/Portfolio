@@ -22,7 +22,7 @@ export default function ProjectGrid({
   const hasMoreProjects = visibleProjects.length < filteredProjects.length;
 
   const loadMore = () => {
-    setVisibleCount((prev) => prev + 3); // Load 6 more projects
+    setVisibleCount((prev) => prev + 3);
   };
 
   return (
