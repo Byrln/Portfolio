@@ -6,13 +6,17 @@ if (!connectionString) {
   console.warn("DATABASE_URL is not set. Database features will be disabled.");
 }
 
-export const pool = new Pool({
-  connectionString,
-  // Neon/Postgres on Vercel generally requires SSL
-  ssl: { rejectUnauthorized: false },
-});
+const pool = connectionString
+  ? new Pool({
+      connectionString,
+      ssl: { rejectUnauthorized: false },
+    })
+  : null;
 
 export async function query(text: string, params: any[] = []) {
+  if (!pool) {
+    throw new Error("DATABASE_URL is not set");
+  }
   const client = await pool.connect();
   try {
     const res = await client.query(text as any, params as any);

@@ -20,6 +20,9 @@ type Deal = {
 
 export async function GET() {
   try {
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ deals: [] });
+    }
     await ensureDealsTable();
     const res = await query(
       `SELECT id, company, contact_name, email, phone, domain, project_type,

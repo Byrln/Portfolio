@@ -87,21 +87,6 @@ export default function DealPage() {
   const [saving, setSaving] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ email?: string; domain?: string }>({});
-
-  const validateEmail = (v: string) => {
-    if (!v) return undefined;
-    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    return ok ? undefined : "Имэйл формат буруу байна";
-  };
-  const validateDomain = (v: string) => {
-    if (!v) return undefined;
-    const ok = /^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(v);
-    return ok ? undefined : "Домэйн формат буруу (ж: example.com)";
-  };
-  const requiredMissing = !company.trim() || !contactName.trim();
-  const emailError = validateEmail(email);
-  const formInvalid = requiredMissing;
 
   const summaryText = useMemo(() => {
     const lines = [
@@ -152,7 +137,7 @@ export default function DealPage() {
           <FormSection title="Холбоо барих мэдээлэл">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs text-white/60">Компани *</label>
+                <label className="text-xs text-white/60">Компани</label>
                 <Input
                   className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
                   placeholder="Компанийн нэр"
@@ -161,7 +146,7 @@ export default function DealPage() {
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs text-white/60">Холбогдох хүн *</label>
+                <label className="text-xs text-white/60">Холбогдох хүн</label>
                 <Input
                   className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
                   placeholder="Нэр"
@@ -174,22 +159,12 @@ export default function DealPage() {
               <div className="space-y-1.5">
                 <label className="text-xs text-white/60">Имэйл</label>
                 <Input
-                  className={cn(
-                    "bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30",
-                    emailError && "border-red-400/50 focus-visible:ring-red-400/30"
-                  )}
+                  className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
                   placeholder="email@example.com"
                   type="email"
                   value={email}
-                  onChange={(e) => {
-                    const v = e.target.value;
-                    setEmail(v);
-                    setErrors((prev) => ({ ...prev, email: validateEmail(v) }));
-                  }}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                {emailError && (
-                  <p className="text-xs text-red-400">{emailError}</p>
-                )}
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs text-white/60">Утас</label>
@@ -211,15 +186,8 @@ export default function DealPage() {
                 className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
                 placeholder="example.com эсвэл төслийн нэр"
                 value={domain}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  setDomain(v);
-                  setErrors((prev) => ({ ...prev, domain: validateDomain(v) }));
-                }}
+                onChange={(e) => setDomain(e.target.value)}
               />
-              {errors.domain && (
-                <p className="text-xs text-red-400">{errors.domain}</p>
-              )}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
@@ -326,7 +294,7 @@ export default function DealPage() {
           <div className="pt-2">
             <Button
               className="w-full h-11 bg-white text-gray-900 hover:bg-white/90 font-semibold"
-              disabled={saving || formInvalid}
+              disabled={saving}
               onClick={async () => {
                 setSaving(true);
                 setSubmitError(null);
@@ -375,11 +343,6 @@ export default function DealPage() {
             >
               {saving ? "Илгээж байна..." : "Илгээх"}
             </Button>
-            {formInvalid && (
-              <p className="mt-2 text-xs text-red-400 text-center">
-                Компани болон холбогдох хүн шаардлагатай.
-              </p>
-            )}
             {submitError && (
               <p className="mt-2 text-xs text-red-400 text-center">
                 {submitError}
