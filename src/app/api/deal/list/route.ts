@@ -24,13 +24,13 @@ export async function GET() {
       return NextResponse.json({ deals: [] });
     }
     await ensureDealsTable();
-    const res = await query(
+    const rows = await query(
       `SELECT id, company, contact_name, email, phone, domain, project_type,
               features, budget, timeline, goals, notes, summary, created_at
        FROM deals
        ORDER BY created_at DESC`
     );
-    const deals: Deal[] = (res.rows || []).map((row: any) => ({
+    const deals: Deal[] = (Array.isArray(rows) ? rows : []).map((row: any) => ({
       id: row.id,
       company: row.company,
       contactName: row.contact_name,

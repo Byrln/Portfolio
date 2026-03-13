@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { neon } from "@neondatabase/serverless";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -6,24 +6,16 @@ if (!connectionString) {
   console.warn("DATABASE_URL is not set. Database features will be disabled.");
 }
 
-const pool = connectionString
-  ? new Pool({
-      connectionString,
-      ssl: { rejectUnauthorized: false },
-    })
-  : null;
-
-export async function query(text: string, params: any[] = []) {
-  if (!pool) {
+function getSql() {
+  if (!connectionString) {
     throw new Error("DATABASE_URL is not set");
   }
-  const client = await pool.connect();
-  try {
-    const res = await client.query(text as any, params as any);
-    return res;
-  } finally {
-    client.release();
-  }
+  return neon(connectionString);
+}
+
+export async function query(text: string, params: any[] = []) {
+  const sql = getSql();
+  return await sql.query(text, params);
 }
 
 export async function ensureDealsTable() {
