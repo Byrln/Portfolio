@@ -37,8 +37,10 @@ export async function POST(req: Request) {
       summary: body.summary || "",
       createdAt: new Date().toISOString(),
     };
-    await ensureDealsTable();
-    await query(
+
+    if (process.env.DATABASE_URL) {
+      await ensureDealsTable();
+      await query(
       `INSERT INTO deals (
         id, company, contact_name, email, phone, domain, project_type,
         features, budget, timeline, goals, notes, summary, created_at
@@ -63,6 +65,8 @@ export async function POST(req: Request) {
         deal.createdAt,
       ]
     );
+    }
+
     return NextResponse.json({ ok: true, id: deal.id });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || "Unknown error" }, { status: 500 });
