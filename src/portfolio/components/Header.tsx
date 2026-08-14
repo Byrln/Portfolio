@@ -1,4 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const navigation = [
   { id: "home", label: "Нүүр", mark: "" },
@@ -10,6 +14,7 @@ const navigation = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -40,9 +45,9 @@ export default function Header() {
 
   return (
     <header className="site-header" data-od-id="site-header">
-      <a className="brand-dot" href="#home" aria-label="Нүүр" onClick={closeMenu}>
+      <Link className="brand-dot" href="/" aria-label="Нүүр" onClick={closeMenu}>
         <span />
-      </a>
+      </Link>
       <nav
         className={`nav${menuOpen ? " open" : ""}`}
         id="nav"
@@ -50,24 +55,24 @@ export default function Header() {
         aria-label="Үндсэн цэс"
       >
         {navigation.map((item) => (
-          <a
+          <Link
             key={item.id}
-            className={activeSection === item.id ? "active" : undefined}
-            href={`#${item.id}`}
+            className={(pathname === "/" && activeSection === item.id) || (pathname === `/${item.id === "work" ? "projects" : item.id}`) ? "active" : undefined}
+            href={pathname === "/" ? `#${item.id}` : `/${item.id === "work" ? "projects" : item.id}`}
             onClick={closeMenu}
           >
             <span className={`nav-mark${item.mark}`} aria-hidden="true" />
             {item.label}
-          </a>
+          </Link>
         ))}
         <span className="nav-spacer" />
-        <a
+        <Link
           className="nav-contact"
-          href="mailto:contact.byrln@gmail.com"
+          href="/contact"
           onClick={closeMenu}
         >
           Захиа бичих
-        </a>
+        </Link>
       </nav>
       <button
         className="menu-toggle"

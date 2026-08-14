@@ -19,6 +19,10 @@ export interface Project {
   image: string;
   alt: string;
   featured?: boolean;
+  context: string;
+  contribution: string;
+  approach: string[];
+  stack: string[];
 }
 
 export interface ProjectFilter {
@@ -48,6 +52,10 @@ export const projects: Project[] = [
     url: "https://satori.mn",
     image: "/assets/project-satori.png",
     alt: "Satori.mn онлайн худалдааны төслийн дэлгэц",
+    context: "Хэрэглэгч бүтээгдэхүүнээ хурдан олж, эргэлзэлгүйгээр худалдан авалтаа дуусгах хэрэгтэй байсан.",
+    contribution: "Full-stack хөгжүүлэлт, интерфэйсийн бүтэц, каталог болон төлбөрийн урсгал.",
+    approach: ["Каталог, хайлт, шүүлтийг нэг ойлгомжтой урсгал болгосон", "Хуудсыг хурдан ачаалахын тулд SSR болон кэшлэлтийг ашигласан", "Контент удирдах болон SEO бүтцийг цэгцэлсэн"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
   },
   {
     id: "khunnu",
@@ -61,6 +69,10 @@ export const projects: Project[] = [
     image: "/assets/project-khunnu.png",
     alt: "Khunnu Hotel төслийн дэлгэц",
     featured: true,
+    context: "Зочин өрөө, үйлчилгээ, байршлын мэдээллийг нэг дороос ойлгоод, захиалга руу төвөггүй шилждэг байх нь гол зорилго байсан.",
+    contribution: "Бүрэн стек архитектур, өрөөний мэдээллийн бүтэц, захиалгын урсгал, CMS.",
+    approach: ["Өрөө сонгох ба захиалах алхмыг богиносгосон", "SSR/SSG рэндэрлэлт, кэшлэлтийг төлөвлөсөн", "Имэйл мэдэгдэл ба удирдлагын урсгалыг холбосон"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Email integration"],
   },
   {
     id: "tosa",
@@ -73,6 +85,10 @@ export const projects: Project[] = [
     url: "https://tosaclinic.com",
     image: "/assets/project-tosa.png",
     alt: "Tosa Clinic төслийн дэлгэц",
+    context: "Хүн өөрт хэрэгтэй үйлчилгээгээ хурдан олж, тохирох эмчээс цаг авахад нь итгэл төрүүлэхүйц энгийн урсгал хэрэгтэй байсан.",
+    contribution: "UX бүтэц, responsive UI, формын баталгаажуулалт, сервер талын хамгаалалт.",
+    approach: ["Үйлчилгээ ба эмчийн мэдээллийг эрэмбэлсэн", "Цаг авах формыг богино, тодорхой болгосон", "Мэдэгдэл болон админ удирдлагыг уялдуулсан"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
   },
   {
     id: "walf",
@@ -85,6 +101,10 @@ export const projects: Project[] = [
     url: "https://worldarmliftingfederation.com",
     image: "/assets/project-walf.png",
     alt: "World Arm Lifting Federation төслийн дэлгэц",
+    context: "Тэмцээн, дүрэм, оноо, мэдээ, гишүүнчлэлийн олон төрлийн мэдээллийг олон улсын хэрэглэгчдэд хүргэх портал.",
+    contribution: "Контентын архитектур, олон хэл, эвентийн модуль, сервер талын рэндэрлэлт.",
+    approach: ["Олон хэлтэй контентын бүтэц байгуулсан", "Тэмцээн ба онооны мэдээллийг тусгай модуль болгосон", "Медиа, мета мэдээлэл, accessibility-г сайжруулсан"],
+    stack: ["Next.js", "TypeScript", "CMS", "SSR"],
   },
   {
     id: "vip76",
@@ -97,66 +117,11 @@ export const projects: Project[] = [
     url: "https://vip76.mn",
     image: "/assets/project-vip76.png",
     alt: "Vip76.mn төслийн дэлгэц",
-  },
-  {
-    id: "mongolnomadic",
-    number: "PROJECT 06",
-    title: "Mongol Nomadic",
-    category: "hospitality",
-    discipline: "Travel / Hospitality",
-    summary:
-      "Байрлах орчин, соёлын хөтөлбөр, үйлчилгээ, захиалгын аяллыг нэг дор холбосон аялал жуулчлалын вэб туршлага.",
-    url: "https://mongolnomadic.com",
-    image: "/projects/mongolnomadic.png",
-    alt: "Mongol Nomadic жуулчны баазын вэбсайт",
-    featured: true,
-  },
-  {
-    id: "maikhantolgoi",
-    number: "PROJECT 07",
-    title: "Maikhan Tolgoi",
-    category: "hospitality",
-    discipline: "Hospitality / Booking",
-    summary:
-      "Жуулчны баазын байр, тав тух, үйлчилгээ, блог болон захиалгын шийдвэрийг нэг урсгалд багтаасан танилцуулга сайт.",
-    url: "https://maikhantolgoi.com",
-    image: "/projects/maikhantolgoi.png",
-    alt: "Maikhan Tolgoi жуулчны баазын вэбсайт",
-  },
-  {
-    id: "isgholdings",
-    number: "PROJECT 08",
-    title: "ISG Holdings",
-    category: "infrastructure",
-    discipline: "Corporate / Infrastructure",
-    summary:
-      "Уул уурхай, барилга, цахилгаан, автоматжуулалт, харилцаа холбоо, ICT шийдлүүдийг capability-гаар нь тодорхойлсон байгууллагын сайт.",
-    url: "https://isgholdings.mn",
-    image: "https://www.isgholdings.mn/_next/image?url=%2Fassets%2Fhero.png&w=1920&q=75",
-    alt: "ISG Holdings байгууллагын вэбсайт",
-  },
-  {
-    id: "asuri",
-    number: "PROJECT 09",
-    title: "asuri.mn",
-    category: "commerce",
-    discipline: "Commerce / Catalog",
-    summary:
-      "Зочлох үйлчилгээний бүтээгдэхүүнийг ангилал, хайлт, холбоо барих урсгалтайгаар танилцуулсан каталог.",
-    url: "https://asuri.mn",
-    image: "/projects/asuri.png",
-    alt: "asuri.mn бүтээгдэхүүний каталог",
-  },
-  {
-    id: "toms",
-    number: "PROJECT 10",
-    title: "TOMS",
-    category: "product",
-    discipline: "Travel / Product",
-    summary:
-      "Аяллын компаниудын аялал, гаралт, захиалга, төлбөр, харилцагчийн мэдээллийг нэг ажлын урсгалд төвлөрүүлэх бүтээгдэхүүн.",
-    url: "#contact",
-    image: "/projects/toms.png",
-    alt: "TOMS аяллын технологийн бүтээгдэхүүн",
+    context: "Өдөр тутмын олон мэдээг хурдан уншуулахын зэрэгцээ дахин ашиглагдахуйц front-end систем бий болгох төсөл.",
+    contribution: "UI болон front-end хөгжүүлэлт, компонентын систем, responsive зан төлөв.",
+    approach: ["Мэдээний карт, жагсаалтыг дахин ашиглагдах компонент болгосон", "Lazy-load болон гүйцэтгэлийн оновчлол хийсэн", "SEO, accessibility, жижиг дэлгэцийн хэрэглээг сайжруулсан"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Component system"],
   },
 ];
+
+export const getProject = (id: string) => projects.find((project) => project.id === id);

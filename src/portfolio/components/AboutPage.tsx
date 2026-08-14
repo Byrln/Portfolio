@@ -1,0 +1,11 @@
+import Link from "next/link";
+
+const principles = [
+  ["01", "Ойлгомж эхэнд", "Хэрэглэгч дараагийн алхмаа таах биш, шууд харах ёстой."],
+  ["02", "Системтэй бүтээнэ", "Нэг удаагийн дэлгэц биш, цааш өргөжих компонент ба дүрэм бүтээдэг."],
+  ["03", "Бодитоор шалгана", "Responsive төлөв, edge case, хурд, accessibility-г явцад нь шалгадаг."],
+];
+
+export default function AboutPage() {
+  return <div className="page-content"><section className="page-hero"><div className="container page-hero-grid"><div><p className="eyebrow">Миний тухай / Баяржавхлан</p><h1>КОДЫН ЦААДАХ<br />ХҮН</h1><p className="page-lead">Сайн интерфэйс өөрийгөө гайхуулахгүй — ажлаа л сайн хийдэг. Би санааг ойлгомжтой бүтэц, найдвартай код, жижиг боловч мэдрэгдэх деталь болгон бүтээдэг.</p></div><figure className="profile-poster"><span className="poster-note hand">hello, энэ бол би</span><img src="/assets/avatar.png" alt="Баяржавхлангийн дүрслэл" /><figcaption><span>Ulaanbaatar, Mongolia</span><span>Web developer</span></figcaption></figure></div></section><section className="story-section"><div className="container story-grid"><div className="section-intro"><span className="eyebrow">01 / Товч түүх</span></div><div><p className="story-opening">Намайг Баяржавхлан гэдэг. Би санааг ажилладаг, хэрэглэхэд эвтэйхэн бүтээгдэхүүн болгоход дуртай.</p><div className="story-columns"><p>IO Institute-ийн Software Engineering хөтөлбөрт суралцангаа бодит бизнесийн веб төслүүд дээр ажиллаж байна. Контентын бүтэц, responsive UI, сервер талын логик, өгөгдлийн сантай нэгэн зэрэг ажиллах нь миний гол давуу тал.</p><p>Би хоосон үр дүн, урт текст, жижиг дэлгэц, удаан сүлжээ, буруу оролт зэрэг мартагддаг төлөвүүдэд анхаардаг.</p></div></div></div></section><section className="principles-section"><div className="container"><div className="section-intro"><span className="eyebrow">02 / Ажиллах зарчим</span></div>{principles.map(([n,t,c])=><article className="principle-row" key={n}><span>{n}</span><h2>{t}</h2><p>{c}</p></article>)}</div></section><section className="page-next"><div className="container"><p className="hand">хийсэн ажлуудаар үргэлжлүүлье</p><h2>САНАА ХЭРХЭН<br />БҮТЭЭГДСЭНИЙГ ҮЗЭХ</h2><Link className="primary-cta" href="/projects">Төслүүд рүү очих</Link></div></section></div>;
+}

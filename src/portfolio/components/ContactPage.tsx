@@ -1,0 +1,9 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+
+export default function ContactPage() {
+  const [sent, setSent] = useState(false);
+  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); };
+  return <div className="page-content"><section className="page-hero contact-page-hero"><div className="container contact-title-wrap"><p className="hand">сайн байна уу?</p><h1>ХАМТДАА<br />БҮТЭЭЕ</h1><p className="page-lead">Таны санаа, зорилго, хугацааны талаар сонсоод дараагийн зөв алхмыг ярилцъя.</p></div></section><section className="contact-workspace"><div className="container contact-grid"><aside className="contact-card"><p className="eyebrow">Шууд холбогдох</p><a href="mailto:contact.byrln@gmail.com">contact.byrln@gmail.com</a><a href="tel:+97699644096">+976 9964-4096</a><a href="https://www.facebook.com/byrlnnn" target="_blank" rel="noreferrer">Facebook ↗</a><div className="availability"><span /><p><strong>Шинэ төсөлд нээлттэй</strong><br />Ulaanbaatar / Remote</p></div></aside><form className="inquiry-form" onSubmit={submit}>{sent ? <div className="success-note" role="status"><span>✓</span><h2>Мэдээлэл бэлэн боллоо</h2><p>Дэлгэрэнгүйгээ <a href="mailto:contact.byrln@gmail.com">contact.byrln@gmail.com</a> руу илгээнэ үү.</p></div> : <><div className="field-row"><label>Таны нэр<input name="name" placeholder="Нэрээ бичнэ үү" required /></label></div><div className="field-row"><label>Имэйл<input name="email" type="email" placeholder="name@email.com" required /></label></div><div className="field-row"><label>Төслийн тухай<textarea name="message" rows={6} placeholder="Зорилго, хамрах хүрээ, хүссэн хугацаагаа бичээрэй" required /></label></div><button className="primary-cta form-submit" type="submit">Мэдээллээ бэлдэх</button></>}</form></div></section></div>;
+}

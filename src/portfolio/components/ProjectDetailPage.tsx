@@ -1,0 +1,9 @@
+import Link from "next/link";
+import { getProject, projects } from "../data/projects";
+
+export default function ProjectDetailPage({ id }: { id: string }) {
+  const project = getProject(id);
+  if (!project) return <section className="not-found"><p className="eyebrow">404 / Төсөл олдсонгүй</p><h1>ЭНЭ ХУУДАС<br />БАЙХГҮЙ БАЙНА</h1><Link className="primary-cta" href="/projects">Бүх төсөл</Link></section>;
+  const next = projects[(projects.findIndex((item) => item.id === id) + 1) % projects.length];
+  return <article className="case-study"><header className={`case-hero${project.featured ? " accent" : ""}`}><div className="container"><Link className="back-link" href="/projects">← Бүх төсөл</Link><div className="case-title-row"><div><p className="eyebrow">{project.number} / {project.discipline}</p><h1>{project.title}</h1><p>{project.summary}</p></div><dl><div><dt>Үүрэг</dt><dd>{project.contribution}</dd></div><div><dt>Багаж</dt><dd>{project.stack.join(" · ")}</dd></div></dl></div></div></header><section className="case-image"><div className="container"><figure><span className="tape tape-one" /><span className="tape tape-two" /><img src={project.image} alt={project.alt} /></figure></div></section><section className="case-body"><div className="container case-body-grid"><aside><p className="eyebrow">Төслийн тухай</p><a href={project.url} target="_blank" rel="noreferrer">Live сайт үзэх ↗</a></aside><div><h2>АСУУДЛЫГ ЗӨВ<br />БҮТЦЭЭР ШИЙДСЭН</h2><p className="case-context">{project.context}</p><div className="decision-list">{project.approach.map((item, index)=><div key={item}><span>0{index + 1}</span><p>{item}</p></div>)}</div></div></div></section><section className="case-next"><div className="container"><p className="hand">дараагийн төсөл</p><Link href={`/projects/${next.id}`}>{next.title}<span>→</span></Link></div></section></article>;
+}

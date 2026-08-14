@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   projectFilters,
   projects,
@@ -61,15 +62,13 @@ export default function ProjectShowcase() {
                 <p className="project-date">{project.discipline}</p>
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>
-                <a
+                <Link
                   className="project-link"
-                  href={project.url}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={`/projects/${project.id}`}
                   aria-label="Төслийг үзэх"
                 >
-                  Төслийг үзэх ↗
-                </a>
+                  Дэлгэрэнгүй үзэх →
+                </Link>
               </div>
               <div className="project-visual">
                 <img src={project.image} alt={project.alt} />
