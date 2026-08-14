@@ -276,7 +276,8 @@ svg {
 .hero-copy h1 span:last-child {
   font-size: .76em;
   color: var(--accent);
-  -webkit-text-stroke: 1px var(--fg);
+  -webkit-text-stroke: 0;
+  paint-order: fill;
   text-shadow: 7px 7px 0 var(--fg);
 }
 
