@@ -8,7 +8,6 @@ const navigation = [
   { id: "home", href: "/", label: "Нүүр", mark: "" },
   { id: "about", href: "/about", label: "Миний тухай", mark: " round" },
   { id: "projects", sectionId: "work", href: "/projects", label: "Төслүүд", mark: "" },
-  { id: "contact", href: "/contact", label: "Холбоо", mark: " diamond" },
 ];
 
 export default function Header() {
@@ -71,7 +70,7 @@ export default function Header() {
           href="/contact"
           onClick={closeMenu}
         >
-          Захиа бичих
+          Холбоо барих
         </Link>
       </nav>
       <button

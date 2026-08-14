@@ -11,7 +11,7 @@ export default function Hero() {
             <span className="label-tape">код бүтээнэ</span>
             <span className="label-tape highlight">детальд дуртай</span>
           </div>
-          <h1 data-od-id="hero-name"><span>BYR</span><span>LN</span></h1>
+          <h1 data-od-id="hero-name"><span>БАЯР</span><span>ЖАВХЛАН</span></h1>
           <div className="hero-rule" aria-hidden="true" />
           <p className="hero-statement" data-od-id="hero-headline">
             Би хэрэглэхэд эвтэйхэн, ойлгомжтой веб туршлага бүтээдэг.
@@ -26,7 +26,7 @@ export default function Hero() {
         <div className="hero-portrait-wrap">
           <span className="portrait-note hand">энэ бол би</span>
           <figure className="hero-portrait">
-            <div className="portrait-topline"><span>BYRLN / 2026</span><span>001</span></div>
+            <div className="portrait-topline"><span>БАЯРЖАВХЛАН / 2026</span><span>001</span></div>
             <img src="/assets/avatar-byrln.png" alt="Баяржавхлангийн хөрөг" />
             <figcaption><span>Web developer</span><span>Ulaanbaatar, MN</span></figcaption>
           </figure>

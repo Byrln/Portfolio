@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -42,6 +43,7 @@ a {
 
 a {
   color: inherit;
+  transition: color .22s ease, background-color .22s ease, border-color .22s ease, transform .22s ease, opacity .22s ease;
 }
 
 button {
@@ -153,6 +155,7 @@ svg {
 
 .nav a:hover {
   background: oklch(0.92 0.004 106.45);
+  transform: translateY(-2px);
 }
 
 .nav a.active {
@@ -262,7 +265,7 @@ svg {
   width: min-content;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(110px, 17vw, 220px);
+  font-size: clamp(90px, 13vw, 168px);
   line-height: .76;
   letter-spacing: -.065em;
   text-transform: uppercase;
@@ -271,6 +274,7 @@ svg {
 }
 
 .hero-copy h1 span:last-child {
+  font-size: .76em;
   color: var(--accent);
   -webkit-text-stroke: 1px var(--fg);
   text-shadow: 7px 7px 0 var(--fg);
@@ -417,6 +421,82 @@ svg {
 .primary-cta:hover {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 var(--border);
+}
+
+.filter,
+.menu-toggle,
+.brand-dot,
+.project-card,
+.hero-portrait,
+.profile-poster,
+.contact-card,
+.inquiry-form,
+.case-image figure {
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, background-color .22s ease;
+}
+
+.filter:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 3px 3px 0 var(--border);
+}
+
+.filter.active:hover {
+  background: var(--fg);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 0 var(--accent);
+}
+
+.project-card:hover .project-visual img {
+  transform: rotate(0deg) scale(1.025);
+}
+
+.project-visual img {
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
+}
+
+.project-link:hover,
+.footer a:hover,
+.case-body aside a:hover,
+.case-next a:hover {
+  color: var(--accent);
+}
+
+.hero-portrait-wrap:hover .hero-portrait {
+  transform: translate(-4px, -5px) rotate(-1deg);
+  box-shadow: 17px 17px 0 var(--accent);
+}
+
+.profile-poster:hover {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 12px 12px 0 var(--accent);
+}
+
+.page-content,
+.case-study,
+.site-shell > .hero,
+.site-shell > .about,
+.site-shell > .work,
+.site-shell > .contact {
+  animation: page-enter .6s ease both;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 
 .primary-cta svg {

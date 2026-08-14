@@ -28,7 +28,7 @@ export const Header = () => {
             </Link>
           ))}
           <Link href="/deal" className="nav-cta">
-            Захиа бичих
+            Холбоо барих
           </Link>
         </nav>
 
