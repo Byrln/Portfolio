@@ -19,7 +19,7 @@ export default function About() {
             className="polaroid left avatar"
             data-od-id="about-portrait"
           >
-            <img src="/assets/avatar.png" alt="Byrln-ийн дүрслэл" />
+            <img src="/assets/avatar-byrln.png" alt="Byrln-ийн дүрслэл" />
             <small>Ulaanbaatar, MN</small>
           </figure>
           <div className="about-copy">

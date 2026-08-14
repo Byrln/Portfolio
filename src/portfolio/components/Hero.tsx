@@ -1,64 +1,42 @@
 export default function Hero() {
   return (
     <section className="hero" id="home" data-od-id="hero-section">
-      <div className="container">
-        <p className="hero-kicker hand">намайг</p>
-        <div className="hero-labels" aria-hidden="true">
-          <span className="label-tape">код бүтээнэ</span>
-          <span className="label-tape highlight">детальд дуртай</span>
+      <div className="container hero-layout">
+        <div className="hero-copy">
+          <div className="hero-meta">
+            <p className="hero-kicker hand">намайг</p>
+            <span className="hero-index">01 / INTRO</span>
+          </div>
+          <div className="hero-labels" aria-hidden="true">
+            <span className="label-tape">код бүтээнэ</span>
+            <span className="label-tape highlight">детальд дуртай</span>
+          </div>
+          <h1 data-od-id="hero-name"><span>BYR</span><span>LN</span></h1>
+          <div className="hero-rule" aria-hidden="true" />
+          <p className="hero-statement" data-od-id="hero-headline">
+            Би хэрэглэхэд эвтэйхэн, ойлгомжтой веб туршлага бүтээдэг.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-cta" href="mailto:contact.byrln@gmail.com" data-od-id="hero-contact-cta">
+              Холбогдох <span aria-hidden="true">↗</span>
+            </a>
+            <span className="hero-scroll">доош гүйлгэх ↓</span>
+          </div>
         </div>
-        <div className="nameplate">
-          <h1 data-od-id="hero-name">BYRLN</h1>
+        <div className="hero-portrait-wrap">
+          <span className="portrait-note hand">энэ бол би</span>
+          <figure className="hero-portrait">
+            <div className="portrait-topline"><span>BYRLN / 2026</span><span>001</span></div>
+            <img src="/assets/avatar-byrln.png" alt="Баяржавхлангийн хөрөг" />
+            <figcaption><span>Web developer</span><span>Ulaanbaatar, MN</span></figcaption>
+          </figure>
+          <div className="portrait-stamp" aria-hidden="true">OPEN<br />FOR<br />WORK</div>
         </div>
-        <div className="status">
-          <span className="status-dot" aria-hidden="true" />
-          Шинэ төсөлд нээлттэй
-        </div>
-        <p className="hero-statement" data-od-id="hero-headline">
-          Би хэрэглэхэд эвтэйхэн, ойлгомжтой веб туршлага бүтээдэг{" "}
-          <span className="target" aria-hidden="true" />
-        </p>
-        <a
-          className="primary-cta"
-          href="mailto:contact.byrln@gmail.com"
-          data-od-id="hero-contact-cta"
-        >
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path
-              d="M3 5.5h14v9H3zM3.5 6l6.5 5 6.5-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-            />
-          </svg>
-          Холбогдох
-        </a>
       </div>
-      <div className="orbit-avatar one" aria-hidden="true">
-        <img src="/assets/avatar.png" alt="" />
+      <div className="hero-footer container">
+        <span>SOFTWARE / INTERFACE / DETAIL</span>
+        <span className="status"><i aria-hidden="true" /> Шинэ төсөлд нээлттэй</span>
       </div>
-      <div className="orbit-avatar two" aria-hidden="true">
-        <img src="/assets/avatar.png" alt="" />
-      </div>
-      <svg
-        className="scribble"
-        viewBox="0 0 1000 80"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M0 55 C180 3 315 67 500 34 S820 10 1000 58"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.2"
-        />
-        <path
-          d="M0 62 C190 17 350 69 520 42 S840 20 1000 64"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth=".7"
-        />
-      </svg>
     </section>
   );
 }
