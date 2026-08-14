@@ -120,7 +120,7 @@ export default function DealPage() {
   ]);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <main className="deal-page container mx-auto px-4 sm:px-6 py-12 sm:py-16">
       {/* Page header */}
       <div className="mb-8 sm:mb-10">
         <h1 className="text-2xl sm:text-3xl font-semibold text-white">

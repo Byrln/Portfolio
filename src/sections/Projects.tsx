@@ -1,70 +1,99 @@
-import { SectionHeader } from "@/components/SectionHeader";
-import ProjectGrid from "@/components/project-grid";
-import type { Project } from "@/lib/data/projects";
-import fs from "fs";
-import path from "path";
+"use client";
+/* eslint-disable @next/next/no-img-element */
 
-function getProjectsFromPublic(): Project[] {
-  const dir = path.join(process.cwd(), "public", "projects");
-  let files: string[] = [];
-  try {
-    files = fs.readdirSync(dir).filter((f) => f.toLowerCase().endsWith(".png"));
-  } catch {
-    files = [];
-  }
+import Link from "next/link";
+import { ArrowUpRight, Clock, GlobeHemisphereWest } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { projects } from "@/lib/data/projects";
 
-  const defaultAccent = "#14b8a6"; // teal-500
-  const defaultTechs = ["Next.js", "Tailwind CSS", "TypeScript", "PostgreSQL"];
-  // Shared Mongolian descriptions used across cards and detail pages
-  const mnDescriptions = mnShortDescriptions;
+const filters = [
+  { label: "Бүгд", value: "all" },
+  { label: "Аялал ба hospitality", value: "travel" },
+  { label: "Худалдаа", value: "commerce" },
+  { label: "Уул уурхай ба дэд бүтэц", value: "industry" },
+];
 
-  return files.map((file) => {
-    const nameNoExt = file.replace(/\.[^/.]+$/, "");
-    const domain = nameNoExt.toLowerCase();
-    const previewImage = `/projects/${file}`;
-
-    // Try to load optional JSON sidecar for richer metadata
-    const jsonPath = path.join(dir, `${nameNoExt}.json`);
-    let meta: Partial<Project & { longDescription?: string }> = {};
-    try {
-      if (fs.existsSync(jsonPath)) {
-        const raw = fs.readFileSync(jsonPath, "utf-8");
-        meta = JSON.parse(raw);
-      }
-    } catch {
-      meta = {};
-    }
-    const defaultDescription = meta.description ?? mnDescriptions[domain] ?? `Энэхүү төслийн вэб сайтыг Next.js, Tailwind CSS, TypeScript, PostgreSQL ашиглан бүтээсэн. UX болон гүйцэтгэлд анхаарч, SEO-г сайжруулсан.`;
-    return {
-      id: domain,
-      company: meta.company ?? domain,
-      year: meta.year ?? "",
-      title: meta.title ?? domain,
-      description: defaultDescription,
-      achievements: meta.achievements ?? [],
-      previewImage,
-      liveUrl: meta.liveUrl ?? `https://${domain}`,
-      technologies: meta.technologies && meta.technologies.length > 0 ? meta.technologies : defaultTechs,
-      category: meta.category ?? "web",
-      accentColor: meta.accentColor ?? defaultAccent,
-    } satisfies Project;
-  });
+function matchesFilter(sector: string, filter: string) {
+  if (filter === "all") return true;
+  if (filter === "travel") return sector.includes("Аялал") || sector.includes("Зочлох");
+  if (filter === "commerce") return sector.includes("Худалдаа");
+  return sector.includes("Уул уурхай") || sector.includes("Дэд бүтэц");
 }
+
 export const ProjectsSection = () => {
-  const items = getProjectsFromPublic();
+  const [activeFilter, setActiveFilter] = useState("all");
+  const visibleProjects = useMemo(
+    () => projects.filter((project) => matchesFilter(project.sector, activeFilter)),
+    [activeFilter]
+  );
+
   return (
-    <section className="pb-16 lg:py-24" id="projects">
-      <div className="container">
-        <SectionHeader
-          eyebrow="Бодит Үр Дүн"
-          title="Онцлох Төслүүд"
-          description="Санааг хэрхэн бодит, сонирхолтой дижитал туршлага болгон хувиргасныг хараарай."
-        />
-        <div className="flex flex-col mt-10 md:mt-20 gap-20">
-          <ProjectGrid initialProjects={items} />
+    <section className="projects-section" id="projects">
+      <div className="page-shell">
+        <div className="section-intro section-intro--work">
+          <div>
+            <p className="eyebrow">Сонгосон ажлууд</p>
+            <h2>Бизнесийн зорилго<br />биелдэг бүтээгдэхүүнүүд.</h2>
+          </div>
+          <p>
+            Салбар бүрийн хэрэгцээ өөр. Харин сайн дижитал бүтээгдэхүүн үргэлж нэг
+            зүйлийг хийдэг: бизнесийн дараагийн алхмыг хялбар болгодог.
+          </p>
+        </div>
+
+        <div className="project-filters" role="group" aria-label="Төслийн шүүлтүүр">
+          {filters.map((filter) => (
+            <button
+              type="button"
+              key={filter.value}
+              className={activeFilter === filter.value ? "is-active" : ""}
+              aria-pressed={activeFilter === filter.value}
+              onClick={() => setActiveFilter(filter.value)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="project-grid">
+          {visibleProjects.map((project, index) => (
+            <motion.article
+              key={project.slug}
+              className={`project-card ${project.status === "upcoming" ? "project-card--upcoming" : ""}`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.35, delay: index * 0.04 }}
+            >
+              <div className="project-card__image">
+                <img src={project.images[0]} alt={`${project.title} төслийн дүрслэл`} />
+                {project.status === "upcoming" && <span className="project-status"><Clock size={14} weight="bold" /> Удахгүй</span>}
+              </div>
+              <div className="project-card__body">
+                <div className="project-meta">
+                  <span>{project.sector}</span>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <div className="project-card__footer">
+                  {project.status === "live" && project.liveUrl ? (
+                    <>
+                      <a href={project.liveUrl} target="_blank" rel="noreferrer" className="project-link">
+                        <GlobeHemisphereWest size={16} weight="bold" /> Шууд үзэх <ArrowUpRight size={15} weight="bold" />
+                      </a>
+                      <Link href={`/projects/${project.slug}`} className="case-link">Case study</Link>
+                    </>
+                  ) : (
+                    <span className="project-coming">Аяллын бизнесүүдэд зориулж бүтээж байна</span>
+                  )}
+                </div>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-import { mnShortDescriptions } from "@/lib/data/projectDescriptions";

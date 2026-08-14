@@ -1,18 +1,5 @@
-import { AboutSection } from "@/sections/About";
-import { ContactSection } from "@/sections/Contact";
-import { HeroSection } from "@/sections/Hero";
-import { ProjectsSection } from "@/sections/Projects";
-import { TapeSection } from "@/sections/Tape";
-import { TestimonialsSection } from "@/sections/Testimonials";
+import PortfolioApp from "@/portfolio/PortfolioApp";
 
 export default function Home() {
-  return (
-    <div>
-      <HeroSection/>
-      <ProjectsSection/>
-      <TapeSection/>
-      <AboutSection/>
-      <ContactSection/>
-    </div>
-  );
+  return <PortfolioApp />;
 }

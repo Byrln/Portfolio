@@ -1,42 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Calistoga } from "next/font/google";
 import "./globals.css";
-import { twMerge } from "tailwind-merge";
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
-import ChatWidget from "@/components/ChatWidget";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const calistoga = Calistoga({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["400"],
-});
 
 export const metadata: Metadata = {
-  title: "Byrln's Portfolio",
-  description: "Let's build magic together!",
+  title: "Баяржавхлан · Дижитал шийдэл",
+  description: "Бизнесийн зорилгыг бодит дижитал шийдэл болгодог Монгол хөгжүүлэгч.",
+  openGraph: {
+    title: "Баяржавхлан · Дижитал шийдэл",
+    description: "Вэбсайт, захиалга болон дотоод системийг бизнесийн зорилготой нь холбож бүтээнэ.",
+    locale: "mn_MN",
+    type: "website",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={twMerge(
-          inter.variable,
-          calistoga.variable,
-          "bg-gray-900 text-white antialiased font-sans"
-        )}
-        >
-        <Header/>
-        {children}
-      <Footer/>
-      <ChatWidget/>
-      </body>
+    <html lang="mn">
+      <body>{children}</body>
     </html>
   );
 }

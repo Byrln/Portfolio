@@ -1,125 +1,56 @@
 "use client";
-import grainImage from "@/assets/images/grain.jpg";
-import { ContactDialog } from "@/components/ContactDialog";
-import { GradientButton } from "@/components/ui/gradient-button";
-import {
-  ArrowUpRightIcon,
-  Phone,
-  Mail,
-  Facebook,
-  Copy,
-  Check,
-} from "lucide-react";
-import { useState } from "react";
-import { Manrope } from "next/font/google";
 
-const manrope = Manrope({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "600", "700"],
-});
+import Link from "next/link";
+import { Check, Copy, EnvelopeSimple, FacebookLogo, Phone } from "@phosphor-icons/react";
+import { useState } from "react";
 
 export const ContactSection = () => {
-  const phoneNumber = "+97699644096";
-  const emailAddress = "contact.byrln@gmail.com";
-  const facebookUrl = "https://www.facebook.com/byrlnnn";
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const email = "contact.byrln@gmail.com";
 
-  const copy = async (text: string, key: string) => {
+  const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopiedKey(key);
-      setTimeout(() => setCopiedKey(null), 1500);
-    } catch {}
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
   };
+
   return (
-    <div className="py-16 pt-12 lg:py-24 lg:pt-20" id="contact">
-      <div className="container">
-        <div className="bg-gradient-to-r from-emerald-300 to-sky-400 text-gray-900 py-8 px-10 rounded-3xl text-center md:text-left relative overflow-hidden z-0">
-          <div
-            className="absolute inset-0 opacity-5 -z-10"
-            style={{ backgroundImage: `url(${grainImage.src})` }}
-          ></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div>
-              <h2
-                className={`font-serif text-2xl md:text-3xl ${manrope.className}`}
-              >
-                Хамтдаа гайхалтай зүйлийг бүтээе!
-              </h2>
-              <p className={`text-sm md:text-base mt-2 ${manrope.className}`}>
-                Шинэ төсөл эхлүүлэхэд бэлэн үү? Холбогдоод таны санааг хэрхэн
-                бодит болгох талаар ярилцъя.
-              </p>
-            </div>
-            <div className="flex flex-col items-center md:items-end gap-4">
-              <div className="w-full max-w-md">
-                <div className="rounded-2xl bg-white/20 text-gray-900 p-3 md:p-4 grid gap-3">
-                  <div className="flex items-center justify-between">
-                    <a
-                      href={`tel:${phoneNumber}`}
-                      aria-label="Утас руу залгах"
-                      className="inline-flex items-center gap-2 font-medium hover:opacity-90"
-                    >
-                      <Phone className="w-4 h-4" /> 9964-4096
-                    </a>
-                    <button
-                      aria-label="Утас хуулж авах"
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/30 hover:bg-white/40"
-                      onClick={() => copy(phoneNumber, "phone")}
-                    >
-                      {copiedKey === "phone" ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <a
-                      href={`mailto:${emailAddress}`}
-                      aria-label="Имэйл бичих"
-                      className="inline-flex items-center gap-2 font-medium hover:opacity-90"
-                    >
-                      <Mail className="w-4 h-4" /> {emailAddress}
-                    </a>
-                    <button
-                      aria-label="Имэйл хуулж авах"
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/30 hover:bg-white/40"
-                      onClick={() => copy(emailAddress, "email")}
-                    >
-                      {copiedKey === "email" ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <a
-                      href={facebookUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Facebook хуудсанд очих"
-                      className="inline-flex items-center gap-2 font-medium hover:opacity-90"
-                    >
-                      <Facebook className="w-4 h-4" /> Facebook
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <a href="/deal" className="w-full mx-auto">
-                <GradientButton
-                  variant="variant"
-                  className="text-white bg-gray-900 inline-flex items-center px-14 md:px-32 h-12 rounded-xl gap-2 w-max"
-                >
-                  <span className="font-semibold">Холбоо барих</span>
-                  <ArrowUpRightIcon className="size-5" />
-                </GradientButton>
-              </a>
-            </div>
+    <section className="contact-section" id="contact">
+      <div className="page-shell contact-shell">
+        <div>
+          <p className="eyebrow">Шууд холбоо</p>
+          <h2>Танд бодит болгох санаа байна уу?</h2>
+          <p className="contact-lede">
+            Санаагаа товч ярь. Би бизнесийн зорилгыг ойлгоод, дараагийн алхмыг хамт
+            тодорхойлоход бэлэн.
+          </p>
+        </div>
+
+        <div className="contact-actions">
+          <a className="contact-action contact-action--primary" href="tel:+97699644096">
+            <Phone size={22} weight="bold" />
+            <span><small>Утас</small>+976 9964 4096</span>
+          </a>
+          <a className="contact-action" href="https://www.facebook.com/byrlnnn" target="_blank" rel="noreferrer">
+            <FacebookLogo size={22} weight="fill" />
+            <span><small>Facebook</small>Bayrjavkhlan</span>
+          </a>
+          <div className="contact-action contact-action--email">
+            <EnvelopeSimple size={22} weight="bold" />
+            <span><small>Имэйл</small>{email}</span>
+            <button type="button" onClick={copyEmail} aria-label="Имэйл хуулах" title="Имэйл хуулах">
+              {copied ? <Check size={18} weight="bold" /> : <Copy size={18} weight="bold" />}
+            </button>
           </div>
+          <Link className="contact-deal-link" href="/deal">
+            Дэлгэрэнгүй ажил санал илгээх →
+          </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
