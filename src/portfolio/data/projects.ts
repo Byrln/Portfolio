@@ -44,7 +44,7 @@ export const projects: Project[] = [
     category: "commerce",
     discipline: "E-commerce / Full stack",
     summary:
-      "Бүтээгдэхүүний каталог, хайлт, төлбөр, контентын удирдлагыг нэг цэгт зангидсан онлайн худалдааны туршлага.",
+      "Бүтээгдэхүүнээ хайж олоод, сонгоод, төлбөрөө хийх хүртэлх бүх алхмыг нэг дор ойлгомжтой болгосон онлайн дэлгүүр.",
     url: "https://satori.mn",
     image: "/assets/project-satori.png",
     alt: "Satori.mn онлайн худалдааны төслийн дэлгэц",
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     category: "hospitality",
     discipline: "Hospitality / Booking",
     summary:
-      "Өрөөний мэдээлэл, үйлчилгээ, онлайн захиалга, CMS удирдлагатай зочид буудлын албан ёсны сайт.",
+      "Өрөө, үйлчилгээ, байршлаа танилцуулж, зочдоо шууд захиалга хийхэд хүргэдэг зочид буудлын сайт.",
     url: "https://khunnuhotel.com",
     image: "/assets/project-khunnu.png",
     alt: "Khunnu Hotel төслийн дэлгэц",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     category: "health",
     discipline: "Healthcare / Web",
     summary:
-      "Үйлчилгээ, эмч нарын мэдээлэл, цаг авах урсгалыг ойлгомжтой нэгтгэсэн эмнэлгийн платформ.",
+      "Үйлчилгээ, эмчийн мэдээлэл, цаг захиалгыг нэг дороос ойлгомжтой хүргэдэг эмнэлгийн сайт.",
     url: "https://tosaclinic.com",
     image: "/assets/project-tosa.png",
     alt: "Tosa Clinic төслийн дэлгэц",

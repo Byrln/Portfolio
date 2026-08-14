@@ -15,7 +15,7 @@ export default function Hero() {
           Шинэ төсөлд нээлттэй
         </div>
         <p className="hero-statement" data-od-id="hero-headline">
-          Би төвөггүй ажилладаг, ойлгомжтой вэб туршлага бүтээдэг{" "}
+          Би хэрэглэхэд эвтэйхэн, ойлгомжтой веб туршлага бүтээдэг{" "}
           <span className="target" aria-hidden="true" />
         </p>
         <a

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   projectFilters,
@@ -24,7 +26,7 @@ export default function ProjectShowcase() {
             төслүүд
           </h2>
           <p>
-            Жинхэнэ бизнесийн асуудлыг код, контент, интерфэйсээр шийдсэн
+            Бизнесийн бодит асуудлыг код, контент, интерфэйсээр шийдсэн
             ажлуудаас.
           </p>
         </div>

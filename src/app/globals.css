@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap");
+
 :root {
   --bg: oklch(0.9696 0.0026 106.45);
   --surface: oklch(0.9905 0.0026 106.45);
@@ -5,7 +7,8 @@
   --muted: oklch(0.6234 0 89.88);
   --border: oklch(0.8475 0.0041 106.49);
   --accent: oklch(0.8353 0.1466 88.51);
-  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  /* Keep Mongolian Cyrillic glyphs in the same condensed face as Latin text. */
+  --font-display: "Roboto Condensed", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   --font-body: "Trebuchet MS", "Aptos", sans-serif;
   --font-mono: "Cascadia Mono", "Courier New", monospace;
   --font-hand: "Segoe Print", "Bradley Hand", cursive;
