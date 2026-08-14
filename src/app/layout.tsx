@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Баяржавхлан · Дижитал шийдэл",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="mn" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body><SmoothScroll />{children}</body>
     </html>
   );
 }
