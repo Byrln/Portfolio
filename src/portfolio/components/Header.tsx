@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navigation = [
-  { id: "home", label: "Нүүр", mark: "" },
-  { id: "about", label: "Миний тухай", mark: " round" },
-  { id: "work", label: "Төслүүд", mark: "" },
-  { id: "contact", label: "Холбоо", mark: " diamond" },
+  { id: "home", href: "/", label: "Нүүр", mark: "" },
+  { id: "about", href: "/about", label: "Миний тухай", mark: " round" },
+  { id: "projects", sectionId: "work", href: "/projects", label: "Төслүүд", mark: "" },
+  { id: "contact", href: "/contact", label: "Холбоо", mark: " diamond" },
 ];
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
     }
 
     const sections = navigation
-      .map(({ id }) => document.getElementById(id))
+      .map((item) => document.getElementById(item.sectionId ?? item.id))
       .filter((section): section is HTMLElement => section !== null);
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,8 +57,8 @@ export default function Header() {
         {navigation.map((item) => (
           <Link
             key={item.id}
-            className={(pathname === "/" && activeSection === item.id) || (pathname === `/${item.id === "work" ? "projects" : item.id}`) ? "active" : undefined}
-            href={pathname === "/" ? `#${item.id}` : `/${item.id === "work" ? "projects" : item.id}`}
+            className={(pathname === item.href) || (pathname === "/" && activeSection === (item.sectionId ?? item.id)) ? "active" : undefined}
+            href={item.href}
             onClick={closeMenu}
           >
             <span className={`nav-mark${item.mark}`} aria-hidden="true" />
